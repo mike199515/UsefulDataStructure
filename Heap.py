@@ -5,8 +5,8 @@ class MinHeap(object):
         if lst is not None:
             self.buildHeap(lst)
 
-    def fromList(self,
-                   lst):  # O(n) as a tighter bound. See http://www.cs.umd.edu/~meesh/351/mount/lectures/lect14-heapsort-analysis-part.pdf
+    def fromList(self, lst):
+        # O(n) as a tighter bound. See http://www.cs.umd.edu/~meesh/351/mount/lectures/lect14-heapsort-analysis-part.pdf
         self.heap = lst
         for i in range(len(self) // 2 - 1, -1, -1):
             self._heapify(i)
