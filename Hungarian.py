@@ -18,7 +18,6 @@ class Hungarian(object):
         # O(V*E)
         assert(type(edges) is set)
         matching = {}
-        match_count = 0
         for left in lefts: Hungarian.isMatched(left, rights, edges, set(), matching) # don't care about output
         return matching
 
