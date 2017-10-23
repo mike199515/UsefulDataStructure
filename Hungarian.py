@@ -4,7 +4,7 @@ class Hungarian(object):
     @staticmethod
     def isMatched(left, rights, edges, searched, matching):
         for right in rights:
-            if (left,right) in edges and right not in searched:
+            if right not in searched and (left,right) in edges:
                 searched.add(right)
                 if right not in matching or Hungarian.isMatched(matching[right], rights, edges, searched, matching):
                     matching[right] = left
