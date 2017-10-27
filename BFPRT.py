@@ -6,16 +6,24 @@ class BFPRT(object):
             if len(lst) <= min_size:
                 return sorted(lst)[k]
             median = BFPRT._roughMedian(lst, c)
-            median_idx = sum(1 for e in lst if e < median)
+
+            median_begin = 0
+            median_end = 0
+            for e in lst:
+                if e < median:
+                    median_begin+=1
+                if e <= median:
+                    median_end += 1
+
             # print("median_value {}, median index is {}, percentile {}".format(median, median_idx, median_idx/len(lst)))
-            if k == median_idx:
+            if median_begin <= k < median_end:
                 return median
-            elif k < median_idx:
+            elif k < median_begin:
                 lst = [e for e in lst if e < median]
                 continue
-            else:  # k > median_idx:
-                lst = [e for e in lst if median < e]
-                k -= (median_idx + 1)
+            else:  # k >= median_end:
+                lst = [e for e in lst if e > median]
+                k -= (median_end)
                 continue
 
     @staticmethod
@@ -35,3 +43,5 @@ if __name__ == "__main__":
     inp = list(range(10000))
     random.shuffle(inp)
     print(BFPRT.getKthSmallest(inp, 3332))
+    print(BFPRT.getKthSmallest([2]*100+[3]+[4]*100, 100))
+
